@@ -31,9 +31,9 @@ import { isPlainObject, isFunction, fadeIn, fadeOut, $$ } from './utils'
       body = '',
       bodyClassName = '',
       footerClassName = '',
-      okText = '确定',
+      okText = 'ok',
       onOK = () => void 0,
-      cancelText = '取消',
+      cancelText = 'cancel',
       onCancel = () => w.hideAlert(),
       maskClosAble = true
     } = config
