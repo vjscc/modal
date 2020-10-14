@@ -1,0 +1,25 @@
+{
+  "name": "gm-alert",
+  "version": "0.1.0",
+  "description": "javascript alert ui kit",
+  "scripts": {
+    "test": "parcel ./test/index.html",
+    "prebuild": "node scripts/clearDist.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:js": "parcel build ./src/index.js --out-dir build --no-source-maps --experimental-scope-hoisting --out-file shineyue-alert.min.js",
+    "build:css": "parcel build ./src/style.less --out-dir build --no-source-maps --experimental-scope-hoisting --out-file shineyue-alert.min.css"
+  },
+  "keywords": [
+    "alert"
+  ],
+  "author": {
+    "name": "GuTianhuang",
+    "email": "gutianhuang@foxmail.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "less": "^3.12.2",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.1.2"
+  }
+}
