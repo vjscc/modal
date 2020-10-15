@@ -2,7 +2,7 @@ import { isPlainObject, isFunction, fadeIn, fadeOut, $$ } from './utils'
 
 !(function (w) {
   const mask = document.createElement('div')
-  mask.setAttribute('class', 'shineyue-alert-mask')
+  mask.setAttribute('class', 'gm-alert-mask')
   mask.style.display = 'none'
   mask.innerHTML = `<div class="modal"><div class="title"></div><div class="body"></div><div class="footer"><button data-type="ok">确定</button><button data-type="cancel">取消</button></div></div>`
   if (document.body) {

@@ -1,6 +1,6 @@
 {
   "name": "gm-alert",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "javascript alert ui kit",
   "scripts": {
     "test": "parcel ./test/index.html",
