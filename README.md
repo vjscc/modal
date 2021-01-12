@@ -1,41 +1,51 @@
 # gm-alert
 
-javascript alert ui kit
+This lib is a JavaScript tool kit of alert. It's dedicated to lightweight, profiles and highly customizable. It just give a basic style and DOM structure of a modal so that you could do what ever you want easily.
 
-## Usage
+## Install
 
-import dependencies, we could only use script to import lib, so **don't run `npm install gm-alert` for now**. Go github to get css and js file.
+```bash
+npm install gm-alert
+# Or use yarn
+yarn add gm-alert
+```
+
+or just use `<script>` tag:
 
 ```html
 <link rel="stylesheet" href="path/to/gm-alert.min.css" />
 <script src="path/to/gm-alert.min.js"></script>
 ```
 
-> Notice that you should import js after window is onload otherwise you will get an error.
+To get dist js and css files, visit [Github](https://github.com/Gu-Miao/gm-alert) or use CDN of `jsDelivr`.
+
+## DOM structure
+
+div.gm-alert-mask > div.modal > div.title + div.body + div.footer > button[data-type="ok"] + button[data-type="cancel"]
 
 ## API
 
-### window.showAlert(config)
+### showAlert(config)
 
 show alert with options:
 
-| option          | type     | description                                                              | default value      |
-| --------------- | -------- | ------------------------------------------------------------------------ | ------------------ |
-| title           | \*       | title of modal, but is `Boolean(title)` is false, title will not display | `''`               |
-| titleClassName  | string   | extra class name for title element                                       | `''`               |
-| body            | \*       | body of modal                                                            | `''`               |
-| bodyClassName   | string   | extra class name for body element                                        | `''`               |
-| footerClassName | string   | extra class name for footer element                                      | `''`               |
-| okText          | string   | text of ok button                                                        | `'ok'`             |
-| onOK            | function | callback when you click ok button                                        | `() => void 0`     |
-| cancelText      | string   | text of cancel button                                                    | `'cancel'`         |
-| onCancel        | function | callback when you click cancel button                                    | `window.hideAlert` |
-| maskClosAble    | boolean  | call `onCancel` when click mask of modal                                 | true               |
+| option          | type     | description                                                                | default value |
+| --------------- | -------- | -------------------------------------------------------------------------- | ------------- |
+| title           | \*       | title of modal, but if `Boolean(title)` is `false`, title will not display | `''`          |
+| titleClassName  | string   | extra class for title element                                              | `''`          |
+| body            | \*       | body of modal                                                              | `''`          |
+| bodyClassName   | string   | extra class for body element                                               | `''`          |
+| footerClassName | string   | extra class for footer element                                             | `''`          |
+| okText          | string   | text of ok button                                                          | `'ok'`        |
+| onOK            | function | callback when you click ok button                                          | `hidAlert`    |
+| cancelText      | string   | text of cancel button                                                      | `'cancel'`    |
+| onCancel        | function | callback when you click cancel button                                      | `hidAlert`    |
+| maskClosAble    | boolean  | call `onCancel` when click mask of modal                                   | true          |
 
-### window.hideAlert()
+### hideAlert()
 
 hide alert
 
-## license
+## License
 
 MIT

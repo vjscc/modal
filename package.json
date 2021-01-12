@@ -1,14 +1,7 @@
 {
   "name": "gm-alert",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "javascript alert ui kit",
-  "scripts": {
-    "test": "parcel ./test/index.html",
-    "prebuild": "node scripts/clearDist.js",
-    "build": "npm run build:css && npm run build:js",
-    "build:js": "parcel build ./src/index.js --out-dir build --no-source-maps --experimental-scope-hoisting --out-file gm-alert.min.js",
-    "build:css": "parcel build ./src/style.less --out-dir build --no-source-maps --experimental-scope-hoisting --out-file gm-alert.min.css"
-  },
   "keywords": [
     "alert"
   ],
@@ -17,9 +10,28 @@
     "email": "gutianhuang@foxmail.com"
   },
   "license": "MIT",
+  "main": "dist/lib/index.js",
+  "browser": "dist/lib/index.js",
+  "module": "dist/es/index.js",
+  "scripts": {
+    "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
+    "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-alert.min.css",
+    "build": "rollup -c && npm run build:css"
+  },
   "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-eslint": "^8.0.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "less": "^3.12.2",
     "parcel-bundler": "^1.12.4",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "rollup": "^2.36.1",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
