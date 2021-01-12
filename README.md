@@ -4,7 +4,7 @@ javascript alert ui kit
 
 ## Usage
 
-import dependencies
+import dependencies, we could only use script to import lib, so **don't run `npm install gm-alert` for now**. Go github to get css and js file.
 
 ```html
 <link rel="stylesheet" href="path/to/gm-alert.min.css" />
