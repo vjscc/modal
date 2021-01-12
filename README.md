@@ -17,6 +17,8 @@ or just use `<script>` tag:
 <script src="path/to/gm-alert.min.js"></script>
 ```
 
+If you use `iife` or `umd` with script tag, you could get global variable `GmAlert`, all API is on it.
+
 To get dist js and css files, visit [Github](https://github.com/Gu-Miao/gm-alert) or use CDN of `jsDelivr`.
 
 ## DOM structure
