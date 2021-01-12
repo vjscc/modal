@@ -21,6 +21,33 @@ If you use `iife` or `umd` with script tag, you could get global variable `GmAle
 
 To get dist js and css files, visit [releases page](https://github.com/Gu-Miao/gm-alert/releases) or use CDN of `jsDelivr`.
 
+## Usage
+
+if you use `import/require`:
+
+```js
+import { showAlert, hideAlert } from 'gm-alert'
+import 'gm-alert/gm-alert.min.css'
+
+showAlert({
+  // ...some options
+})
+
+hideAlert()
+```
+
+> Don't forget to import css file.
+
+if you use `<script>` tag:
+
+```js
+GmAlert.showAlert({
+  // ...some options
+})
+
+GmAlert.hideAlert()
+```
+
 ## DOM structure
 
 div.gm-alert-mask > div.modal > div.title + div.body + div.footer > button[data-type="ok"] + button[data-type="cancel"]
