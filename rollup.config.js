@@ -1,4 +1,3 @@
-import path from 'path'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import eslint from '@rollup/plugin-eslint'
@@ -16,7 +15,8 @@ export default {
       name,
       file: pkg.main,
       format: 'umd',
-      sourcemap: true
+      sourcemap: true,
+      plugins: [terser()]
     },
     {
       file: pkg.module,
@@ -24,7 +24,7 @@ export default {
     },
     {
       name,
-      file: path.join('dist/browser/', `${pkg.name}.min.js`),
+      file: pkg.browser,
       format: 'iife',
       sourcemap: true,
       plugins: [terser()]
