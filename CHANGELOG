@@ -17,9 +17,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Change dir structure and npm scripts.
 
-## 1.0.0 - 2021-02-06
+## 1.0.1 - 2021-02-06
 
 ### Changed 
 
 - Fix build error
 
+## 2.0.0 - 2021-02-08
+
+### Added
+
+- Add test page for production.
+- Add test page to npm ignore list.
+- Add isUndefined utility.
+
+### Changed
+
+- Rewrite main API, we use a function like jQuery to create alert instance so that we could create and manage a number of alert rather than change DOM of a single alert over and over again.
+- Fixed error config in package.json and rollup.config.js.
+
+### Removed 
+
+- Remove useless editorconfig.
+- Remove $$ utility.

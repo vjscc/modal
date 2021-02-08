@@ -17,8 +17,6 @@ or just use `<script>` tag:
 <script src="path/to/gm-alert.min.js"></script>
 ```
 
-If you use `iife` or `umd` with script tag, you could get global variable `GmAlert`, all API is on it.
-
 To get dist js and css files, visit [releases page](https://github.com/Gu-Miao/gm-alert/releases) or use CDN of `jsDelivr`.
 
 ## Usage
@@ -26,37 +24,30 @@ To get dist js and css files, visit [releases page](https://github.com/Gu-Miao/g
 if you use `import/require`:
 
 ```js
-import { showAlert, hideAlert } from 'gm-alert'
+import GmAlert from 'gm-alert'
 import 'gm-alert/gm-alert.min.css'
 
-showAlert({
+// Create an alert instance
+const instance = GmAlert({
   // ...some options
 })
 
-hideAlert()
+// Show alert
+instance.show()
+
+// Hide alert
+instance.hide()
 ```
 
 > Don't forget to import css file.
 
-if you use `<script>` tag:
-
-```js
-GmAlert.showAlert({
-  // ...some options
-})
-
-GmAlert.hideAlert()
-```
-
-## DOM structure
-
-div.gm-alert-mask > div.modal > div.title + div.body + div.footer > button[data-type="ok"] + button[data-type="cancel"]
+If you use `<script/>` tag to import, `GmAlert` will be mounted on `window`.
 
 ## API
 
-### showAlert(config)
+### GmAlert(config)
 
-show alert with options:
+Create a new alert instance with options:
 
 | option          | type     | description                                                                | default value |
 | --------------- | -------- | -------------------------------------------------------------------------- | ------------- |
@@ -66,14 +57,32 @@ show alert with options:
 | bodyClassName   | string   | extra class for body element                                               | `''`          |
 | footerClassName | string   | extra class for footer element                                             | `''`          |
 | okText          | string   | text of ok button                                                          | `'ok'`        |
-| onOK            | function | callback when you click ok button                                          | `hidAlert`    |
+| onOK            | function | callback when you click ok button                                          | `undefined`   |
 | cancelText      | string   | text of cancel button                                                      | `'cancel'`    |
-| onCancel        | function | callback when you click cancel button                                      | `hidAlert`    |
+| onCancel        | function | callback when you click cancel button                                      | `undefined`   |
 | maskClosAble    | boolean  | call `onCancel` when click mask of modal                                   | true          |
+| isShow          | boolean  | show alert or not                                                          | false         |
 
-### hideAlert()
+It will return an alert instance.
 
-hide alert
+### instance.show()
+
+Show alert and change `instance.isShow` to `true`.
+
+### instance.hide()
+
+Hide alert and change `instance.isShow` to `false`.
+
+## About v2.0.0
+
+The new API draws on the design idea of jQuery, so that you could set every detail of every alert more easily. But please pay attention that you can't change the actual effect by modifying fileds on instance without call prototype method yet. And more method is coming soon.
+
+## Coming soon
+
+- Prototype methods for custom alert.
+- extend() to extend alert.
+- Hooks for status change listener.
+- Plugin interface.
 
 ## License
 

@@ -1,13 +1,18 @@
 {
   "name": "gm-alert",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "javascript alert ui kit",
   "keywords": [
-    "alert"
+    "alert",
+    "modal"
   ],
   "author": {
     "name": "GuTianhuang",
     "email": "gutianhuang@foxmail.com"
+  },
+  "repository": {
+    "url": "git+https://github.com/Gu-Miao/gm-alert.git",
+    "type": "git"
   },
   "homepage": "https://github.com/Gu-Miao/gm-alert",
   "license": "MIT",
