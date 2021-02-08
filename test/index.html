@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dist Test Page</title>
+    <link rel="stylesheet" href="../dist/gm-alert.min.css" />
+  </head>
+  <body>
+    <h1>Dist test page</h1>
+    <button id="show">Show Alert</button>
+  </body>
+  <script src="../dist/browser/gm-alert.min.js"></script>
+  <script>
+    var alert = GmAlert({
+      title: 'This is a title',
+      body:
+        'Some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content',
+      maskCloseAble: true
+    }).show()
+
+    document.getElementById('show').addEventListener('click', () => alert.show())
+  </script>
+</html>
