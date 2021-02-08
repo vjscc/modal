@@ -30,8 +30,6 @@ export function fadeIn(el, display = 'block') {
   })()
 }
 
-const toString = Object.prototype.toString
-
 /**
  * Gets the `toStringTag` of `value`.
  *
@@ -43,7 +41,7 @@ function getTag(value) {
   if (value === null) {
     return value === undefined ? '[object Undefined]' : '[object Null]'
   }
-  return toString.call(value)
+  return Object.prototype.toString.call(value)
 }
 
 /**
@@ -88,12 +86,11 @@ export function isFunction(value) {
 }
 
 /**
- * DOM selector
+ * Checks if `value` is `undefined`.
  *
- * @param {string} selector dom element selector
- * @param {HTMLElement} el dom element, default is `doucment`
- * @returns {HTMLElement} dom element
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
  */
-export function $$(selector, el = document) {
-  return el.querySelector(selector)
+export function isUndefined(value) {
+  return typeof value === undefined
 }
