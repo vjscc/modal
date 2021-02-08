@@ -75,7 +75,7 @@ Hide alert and change `instance.isShow` to `false`.
 
 ## About v2.0.0
 
-The new API draws on the design idea of jQuery, so that you could set every detail of every alert more easily. But please pay attention that you can't change the actual effect by modifying fileds on instance without call prototype method yet. And more method is coming soon.
+The new API draws on the design idea of jQuery, so that you could set every detail of every alert more easily. But please pay attention that you can't change the actual effect by modifying fileds on instance without calling prototype method yet. And more method is coming soon.
 
 ## Coming soon
 
