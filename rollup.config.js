@@ -14,7 +14,7 @@ export default {
   output: [
     {
       name,
-      file: pkg.browser,
+      file: pkg.main,
       format: 'umd',
       sourcemap: true
     },
@@ -24,13 +24,7 @@ export default {
     },
     {
       name,
-      file: path.join('dist/browser/', `${pkg.name}-${pkg.version}.js`),
-      format: 'iife',
-      sourcemap: true
-    },
-    {
-      name,
-      file: path.join('dist/browser/', `${pkg.name}-${pkg.version}.min.js`),
+      file: path.join('dist/browser/', `${pkg.name}.min.js`),
       format: 'iife',
       sourcemap: true,
       plugins: [terser()]

@@ -9,10 +9,11 @@
     "name": "GuTianhuang",
     "email": "gutianhuang@foxmail.com"
   },
+  "homepage": "https://github.com/Gu-Miao/gm-alert",
   "license": "MIT",
-  "main": "dist/lib/index.js",
-  "browser": "dist/lib/index.js",
-  "module": "dist/es/index.js",
+  "main": "dist/lib/gm-alert.min.js",
+  "browser": "dist/browser/gm-alert.min.js",
+  "module": "dist/es/gm-alert.js",
   "scripts": {
     "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
     "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-alert.min.css",
