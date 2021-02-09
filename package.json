@@ -16,6 +16,13 @@
   },
   "homepage": "https://github.com/Gu-Miao/gm-alert",
   "license": "MIT",
+  "files": [
+    "package.json",
+    "README.md",
+    "README_zh.md",
+    "LICENSE",
+    "dist"
+  ],
   "main": "dist/lib/gm-alert.min.js",
   "browser": "dist/browser/gm-alert.min.js",
   "module": "dist/es/gm-alert.js",
