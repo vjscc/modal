@@ -46,3 +46,5 @@ $form.addEventListener('submit', e => {
     .setCancel(cancelText)
     .show()
 })
+
+window.a = alert
