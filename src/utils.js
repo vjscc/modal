@@ -94,3 +94,31 @@ export function isFunction(value) {
 export function isUndefined(value) {
   return typeof value === undefined
 }
+
+/**
+ * Checks if `value` is `string`.
+ *
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a `string`, else `false`.
+ */
+function isString(value) {
+  return Object.prototype.toString.call(value) === '[object String]'
+}
+
+/**
+ * Change content of a html node.
+ *
+ * @param {HTMLElement} el Html node.
+ * @param {HTMLElement|string} content New content.
+ */
+export function changeNodeContent(el, content) {
+  try {
+    if (isString(content)) {
+      el.innerHTML = content
+    } else {
+      el.append(content)
+    }
+  } catch (err) {
+    throw new Error(err)
+  }
+}
