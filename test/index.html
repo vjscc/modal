@@ -3,22 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dist Test Page</title>
+    <title>test page</title>
     <link rel="stylesheet" href="../dist/gm-alert.min.css" />
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <h1>Dist test page</h1>
-    <button id="show">Show Alert</button>
+    <h1>Test Page</h1>
+    <form>
+      <div class="form-group">
+        <label for="header">Set header:</label>
+        <input type="text" id="header" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="header-class">Set extra class for header:</label>
+        <input type="text" id="header-class" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="body">Set body:</label>
+        <textarea type="text" id="body" autocomplete="off"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="body-class">Set extra class for body:</label>
+        <input type="text" id="body-class" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="footer-class">Set extra class for footer:</label>
+        <input type="text" id="footer-class" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="ok">Set ok text:</label>
+        <input type="text" id="ok" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="cancel">Set cancel text:</label>
+        <input type="text" id="cancel" autocomplete="off" />
+      </div>
+      <button id="show" type="submit">Submit Change and Show</button>
+      <button id="show" type="button">Show</button>
+    </form>
   </body>
   <script src="../dist/browser/gm-alert.min.js"></script>
-  <script>
-    var alert = GmAlert({
-      title: 'This is a title',
-      body:
-        'Some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content some content',
-      maskCloseAble: true
-    }).show()
-
-    document.getElementById('show').addEventListener('click', () => alert.show())
-  </script>
+  <script src="./index.js"></script>
 </html>

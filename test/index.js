@@ -1,5 +1,3 @@
-import GmAlert from '../index.js'
-
 let header = ''
 let headerClass = ''
 let body = ''
@@ -8,7 +6,7 @@ let footerClass = ''
 let okText = 'ok'
 let cancelText = 'cancel'
 
-const alert = GmAlert({
+const alert = window.GmAlert({
   header,
   headerClass,
   body,
@@ -16,6 +14,7 @@ const alert = GmAlert({
   footerClass,
   okText,
   cancelText,
+  showFooter: true,
   maskCloseAble: true,
   isShow: false
 })
