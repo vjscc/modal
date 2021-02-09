@@ -1,6 +1,6 @@
 {
   "name": "gm-alert",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "javascript alert ui kit",
   "keywords": [
     "alert",
@@ -22,7 +22,8 @@
   "scripts": {
     "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
     "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-alert.min.css",
-    "build": "rollup -c && npm run build:css"
+    "build:js": "rollup -c",
+    "build": "npm run build:js && npm run build:css"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
