@@ -1,13 +1,17 @@
 import { isPlainObject, isFunction, isUndefined, fadeIn, fadeOut } from './utils'
 
 let i = 0
+const listeners = {
+  onOK: undefined,
+  onCancel: undefined
+}
 
 function createMask() {
   const $mask = document.createElement('div')
   $mask.setAttribute('class', 'gm-alert-mask')
   $mask.setAttribute('id', `ga-${i++}`)
   $mask.style.display = 'none'
-  $mask.innerHTML = `<div data-role="modal"><div data-role="title"></div><div data-role="body"></div><div data-role="footer"><button data-role="ok">确定</button><button data-role="cancel">取消</button></div></div>`
+  $mask.innerHTML = `<div data-role="modal"><div data-role="header"></div><div data-role="body"></div><div data-role="footer"><button data-role="ok">确定</button><button data-role="cancel">取消</button></div></div>`
   document.body.append($mask)
   return $mask
 }
@@ -20,10 +24,11 @@ const GmAlert = config => {
 
   // Destruct config
   const {
-    title = '',
-    titleClassName = '',
+    header = '',
+    headerClassName = '',
     body = '',
     bodyClassName = '',
+    footer = undefined,
     showFooter = true,
     footerClassName = '',
     okText = 'ok',
@@ -42,7 +47,9 @@ const GmAlert = config => {
     throw new ReferenceError(`Config item 'onCancel' is not a function or undefined.`)
   }
 
-  const instance = { ...config }
+  let _show = isShow
+
+  const instance = {}
 
   instance.__proto__ = GmAlert.prototype
 
@@ -52,35 +59,24 @@ const GmAlert = config => {
   instance.$modal = instance.$mask.querySelector('[data-role="modal"]')
   instance.$modal.addEventListener('click', e => e.stopPropagation())
 
-  // Some elements
-  instance.$title = instance.$modal.querySelector('[data-role="title"]')
-  instance.$body = instance.$modal.querySelector('[data-role="body"]')
-  instance.$footer = instance.$modal.querySelector('[data-role="footer"]')
-  instance.$ok = instance.$footer.querySelector('[data-role="ok"]')
-  instance.$cancel = instance.$footer.querySelector('[data-role="cancel"]')
-
-  // Set title
-  instance.$title.innerHTML = title
-  instance.$title.style.display = title ? 'block' : 'none'
-  titleClassName && instance.$title.setAttribute('class', titleClassName)
-
-  // Set body
-  instance.$body.innerHTML = body
-  bodyClassName && instance.$body.setAttribute('class', bodyClassName)
-
-  // Set footer
-  footerClassName && instance.$footer.setAttribute('class', footerClassName)
-  if (!showFooter) instance.$footer.style.display = 'none'
-
-  // Set OK button
-  instance.$ok.innerHTML = okText
-  instance.$ok.addEventListener('click', onOK ?? (() => instance.hide()))
-
-  // Set cancel button
-  instance.$cancel.innerHTML = cancelText
-  instance.$cancel.addEventListener('click', onCancel ?? (() => instance.hide()))
+  // Set instance
+  instance
+    .setHeader(header, headerClassName)
+    .setBody(body, bodyClassName)
+    .setFooter(footer, showFooter, footerClassName)
+    .setOK(okText, onOK)
+    .setCancel(cancelText, onCancel)
 
   // Show modal or not
+  Object.defineProperty(instance, 'isShow', {
+    get() {
+      return _show
+    },
+    set(value) {
+      _show = value
+      value ? this.show() : this.hide()
+    }
+  })
   isShow && instance.show()
 
   return instance
@@ -88,14 +84,73 @@ const GmAlert = config => {
 
 GmAlert.prototype.show = function () {
   fadeIn(this.$mask, 'flex')
-  this.isShow = true
+  !this.isShow && (this.isShow = true)
+
   return this
 }
 
 GmAlert.prototype.hide = function () {
   fadeOut(this.$mask)
-  this.isShow = false
+  this.isShow && (this.isShow = false)
+
   return this
+}
+
+GmAlert.prototype.setHeader = function (header, headerClassName) {
+  if (!this.$header) this.$header = this.$modal.querySelector('[data-role="header"]')
+  this.$header.innerHTML = header
+  this.$header.style.display = header ? 'block' : 'none'
+  headerClassName && this.$header.setAttribute('class', headerClassName)
+
+  return this
+}
+
+GmAlert.prototype.setBody = function (body, bodyClassName) {
+  if (!this.$body) this.$body = this.$modal.querySelector('[data-role="body"]')
+  this.$body.innerHTML = body
+  bodyClassName && this.$body.setAttribute('class', bodyClassName)
+
+  return this
+}
+
+GmAlert.prototype.setFooter = function (footer, showFooter, footerClassName) {
+  if (!this.$footer) this.$footer = this.$modal.querySelector('[data-role="footer"]')
+  footer && (this.$footer.innerHTML = footer)
+  footerClassName && this.$footer.setAttribute('class', footerClassName)
+  if (!showFooter) this.$footer.style.display = 'none'
+
+  return this
+}
+
+function setOKorCancel(type, text, callback) {
+  const $type = '$' + type
+  const onType = type === 'ok' ? 'onOK' : 'onCancel'
+  if (!this[$type]) {
+    this[$type] = this.$modal.querySelector(`[data-role="${type}"]`)
+    listeners[onType] = callback ? () => callback(this) : () => this.hide()
+    this[$type].addEventListener('click', listeners[onType])
+  }
+  if (this[$type] && callback) {
+    this[$type].removeEventListener('click', listeners[onType])
+    listeners[onType] = () => callback(this)
+    this[$type].addEventListener('click', listeners[onType])
+  }
+  this[$type].innerHTML = text
+
+  return this
+}
+
+GmAlert.prototype.setOK = function (okText, onOK) {
+  return setOKorCancel.call(this, 'ok', okText, onOK)
+}
+
+GmAlert.prototype.setCancel = function (cancelText, onCancel) {
+  const _onCancel = () => {
+    this.hide()
+    onCancel && onCancel(this)
+  }
+
+  return setOKorCancel.call(this, 'cancel', cancelText, _onCancel)
 }
 
 export default GmAlert
