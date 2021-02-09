@@ -1,4 +1,4 @@
-import { isPlainObject, isFunction, isUndefined, fadeIn, fadeOut } from './utils'
+import { isPlainObject, isFunction, isUndefined, changeNodeContent, fadeIn, fadeOut } from './utils'
 
 let i = 0
 const listeners = {
@@ -28,7 +28,6 @@ const GmAlert = config => {
     headerClassName = '',
     body = '',
     bodyClassName = '',
-    footer = undefined,
     showFooter = true,
     footerClassName = '',
     okText = 'ok',
@@ -63,7 +62,7 @@ const GmAlert = config => {
   instance
     .setHeader(header, headerClassName)
     .setBody(body, bodyClassName)
-    .setFooter(footer, showFooter, footerClassName)
+    .setFooter(showFooter, footerClassName)
     .setOK(okText, onOK)
     .setCancel(cancelText, onCancel)
 
@@ -98,7 +97,7 @@ GmAlert.prototype.hide = function () {
 
 GmAlert.prototype.setHeader = function (header, headerClassName) {
   if (!this.$header) this.$header = this.$modal.querySelector('[data-role="header"]')
-  this.$header.innerHTML = header
+  changeNodeContent(this.$header, header)
   this.$header.style.display = header ? 'block' : 'none'
   headerClassName && this.$header.setAttribute('class', headerClassName)
 
@@ -107,15 +106,14 @@ GmAlert.prototype.setHeader = function (header, headerClassName) {
 
 GmAlert.prototype.setBody = function (body, bodyClassName) {
   if (!this.$body) this.$body = this.$modal.querySelector('[data-role="body"]')
-  this.$body.innerHTML = body
+  changeNodeContent(this.$body, body)
   bodyClassName && this.$body.setAttribute('class', bodyClassName)
 
   return this
 }
 
-GmAlert.prototype.setFooter = function (footer, showFooter, footerClassName) {
+GmAlert.prototype.setFooter = function (showFooter, footerClassName) {
   if (!this.$footer) this.$footer = this.$modal.querySelector('[data-role="footer"]')
-  footer && (this.$footer.innerHTML = footer)
   footerClassName && this.$footer.setAttribute('class', footerClassName)
   if (!showFooter) this.$footer.style.display = 'none'
 
