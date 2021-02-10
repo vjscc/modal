@@ -1,6 +1,6 @@
 # gm-alert
 
-`gm-alert` 是一个用来制作弹出层的库。它致力于轻量（gzip 之后只有 4KB）、简洁和高度可定制化。我们提供了非常简洁的实现，你即可以开箱即用，也能轻松定制你想要的效果。
+`gm-alert` 是一个用来制作弹出层的库。它致力于轻量、简洁和高度可定制化。我们提供了非常简洁的实现，你即可以开箱即用，也能轻松定制你想要的效果。
 
 **简体中文** | [English](./README.md)
 
@@ -107,6 +107,8 @@ div[data-role='header']
 
 - `onOK` 和 `onCancel` 会接受弹出层实例本身作为第一个参数。
 
+- 你可以使用 `document.querySelector('gm-alert-' + id)` 来获取弹出层的 html 节点。
+
 > 下面提到的 `this` 均指调用 `GmAlert()` 创建的弹出层实例。
 
 ### this.isShow
@@ -200,6 +202,10 @@ div.gm-alert-mask
             |
             +--button[data-role='button']
 ```
+
+## 历史版本文档
+
+请访问[这里](./docs/history.md)。
 
 ## 即将到来
 
