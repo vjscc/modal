@@ -48,3 +48,8 @@ $form.addEventListener('submit', e => {
 })
 
 window.a = alert
+window.b = window.GmAlert({
+  header: 'BBB',
+  body: 'BBBBBBBBBB',
+  maskCloseAble: true
+})
