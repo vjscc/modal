@@ -47,3 +47,10 @@ $form.addEventListener('submit', e => {
     .setCancel(cancelText)
     .show()
 })
+
+window.a = alert
+window.b = GmAlert({
+  header: 'B',
+  body: 'BBBBBBBBB',
+  maskCloseAble: true
+})
