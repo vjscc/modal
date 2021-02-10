@@ -1,6 +1,6 @@
 # gm-alert
 
-This lib is a JavaScript tool kit of alert. It's dedicated to lightweight(only 4KB after gzip), concise and highly customizable. We just give a simple realization of a alert so that you could do what ever you want easily based on it.
+This lib is a JavaScript tool kit of alert. It's dedicated to lightweight, concise and highly customizable. We just give a simple realization of a alert so that you could do what ever you want easily based on it.
 
 [简体中文](./README_zh.md) | **English**
 
@@ -85,7 +85,8 @@ GmAlert {
   $mask
   $modal
   $ok
-  isShow
+  isShow,
+  id
 }
 ```
 
@@ -106,6 +107,8 @@ Obviously, this is more semantic.
 - Type of `header` and `body` had been changed to `string|HTMLElement`, if you give a string, we will change its `innerHTML`, otherwise we'll call `append()` to insert coming content.
 
 - `onOK` and `onCancel` will recevie alert instance as first argument.
+
+- You could use `document.querySelector('gm-alert-' + id)` to get container of alert HTML node.
 
 > The `this` below means the instance created by `GmAlert()`.
 
@@ -202,6 +205,10 @@ div.gm-alert-mask
             |
             +--button[data-role='button']
 ```
+
+## History versions documents
+
+Please visit [this](./docs/history.md).
 
 ## Coming soon
 
