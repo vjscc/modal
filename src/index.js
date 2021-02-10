@@ -1,19 +1,17 @@
 import { isPlainObject, isFunction, isUndefined, changeNodeContent, fadeIn, fadeOut } from './utils'
 
 let i = 0
-const listeners = {
-  onOK: undefined,
-  onCancel: undefined
-}
+const listeners = {}
 
 function createMask() {
   const $mask = document.createElement('div')
   $mask.setAttribute('class', 'gm-alert-mask')
-  $mask.setAttribute('id', `ga-${i++}`)
+  $mask.setAttribute('id', `gm-alert-${i}`)
   $mask.style.display = 'none'
   $mask.innerHTML = `<div data-role="modal"><div data-role="header"></div><div data-role="body"></div><div data-role="footer"><button data-role="ok">确定</button><button data-role="cancel">取消</button></div></div>`
   document.body.append($mask)
-  return $mask
+  listeners[i] = { onOK: undefined, onCancel: undefined }
+  return [$mask, i++]
 }
 
 const GmAlert = config => {
@@ -48,11 +46,10 @@ const GmAlert = config => {
 
   let _show = isShow
 
-  const instance = {}
-
+  const [$mask, id] = createMask()
+  const instance = { $mask, id }
   instance.__proto__ = GmAlert.prototype
 
-  instance.$mask = createMask()
   maskClosAble && instance.$mask.addEventListener('click', () => instance.hide())
 
   instance.$modal = instance.$mask.querySelector('[data-role="modal"]')
@@ -123,15 +120,16 @@ GmAlert.prototype.setFooter = function (showFooter, footerClassName) {
 function setOKorCancel(type, text, callback) {
   const $type = '$' + type
   const onType = type === 'ok' ? 'onOK' : 'onCancel'
+  const { id } = this
   if (!this[$type]) {
     this[$type] = this.$modal.querySelector(`[data-role="${type}"]`)
-    listeners[onType] = callback ? () => callback(this) : () => this.hide()
-    this[$type].addEventListener('click', listeners[onType])
+    listeners[id][onType] = callback ? () => callback(this) : () => this.hide()
+    this[$type].addEventListener('click', listeners[id][onType])
   }
   if (this[$type] && callback) {
-    this[$type].removeEventListener('click', listeners[onType])
-    listeners[onType] = () => callback(this)
-    this[$type].addEventListener('click', listeners[onType])
+    this[$type].removeEventListener('click', listeners[id][onType])
+    listeners[id][onType] = () => callback(this)
+    this[$type].addEventListener('click', listeners[id][onType])
   }
   this[$type].innerHTML = text
 
