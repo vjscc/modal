@@ -1,6 +1,6 @@
 # gm-alert
 
-This lib is a JavaScript tool kit of alert. It's dedicated to lightweight(only 4KB after gzip), concise and highly customizable. It just give a basic style and DOM structure of a modal so that you could do what ever you want easily.
+This lib is a JavaScript tool kit of alert. It's dedicated to lightweight(only 4KB after gzip), concise and highly customizable. We just give a simple realization of a alert so that you could do what ever you want easily based on it.
 
 [简体中文](./README_zh.md) | **English**
 
@@ -12,18 +12,18 @@ npm install gm-alert -S
 yarn add gm-alert
 ```
 
-or just use `<script>` tag:
+Or just use `<script>` tag:
 
 ```html
 <link rel="stylesheet" href="path/to/gm-alert.min.css" />
 <script src="path/to/gm-alert.min.js"></script>
 ```
 
-To get dist js and css files, visit [releases page](https://github.com/Gu-Miao/gm-alert/releases) or use CDN like `jsDelivr`.
+To get dist js and css files, please visit [Releases Page](https://github.com/Gu-Miao/gm-alert/releases) or use CDN like `jsDelivr`.
 
 ## Usage
 
-if you use `import/require`:
+If you use `import/require`:
 
 ```js
 import GmAlert from 'gm-alert'
@@ -41,9 +41,9 @@ instance.show()
 instance.hide()
 ```
 
-> Don't forget to import css file.
-
 If you use `<script/>` tag to import, `GmAlert` will be mounted on `window`.
+
+> Don't forget to import css file.
 
 ## API
 
@@ -89,7 +89,7 @@ GmAlert {
 }
 ```
 
-Properties start with `$` means it is a HTML element and you could operate it directly. In version 2.0.0, We expose all of options on instance but they are useless and unreactive after initialization, thus, they were removed.
+Properties start with `$` means it is a HTML element and you could operate it directly. In version 2.0.0, We had exposed all of options on instance but they were useless and unreactive after initialization, thus, they were removed.
 
 - We use `header` instead of `title` because we are considering changing the DOM structure of top part in modal:
 
@@ -103,7 +103,7 @@ div[data-role='header']
 
 Obviously, this is more semantic.
 
-- Type of `header` and `body` had been changed to `string\|HTMLElement`, if you give a string, we will change its `innerHTML`, otherwise we'll call `append()` to insert coming content.
+- Type of `header` and `body` had been changed to `string|HTMLElement`, if you give a string, we will change its `innerHTML`, otherwise we'll call `append()` to insert coming content.
 
 - `onOK` and `onCancel` will recevie alert instance as first argument.
 
@@ -129,7 +129,7 @@ Set header content and extra classnames.
 
 Content of header, it could be a string or a HTML element.
 
-- `headerClassName` **{ string }** _option_
+- `headerClassName` **{ string }** _optional_
 
 Extra classnames for header, and if you have extra classname before and `headerClassName` is not truthy, we'll not change it.
 
@@ -141,7 +141,7 @@ Set body content and extra classnames.
 
 Content of body, it could be a string or a HTML element.
 
-- `bodyClassName` **{ string }** _option_
+- `bodyClassName` **{ string }** _optional_
 
 Extra classnames for body, and if you have extra classname before and `bodyClassName` is not truthy, we'll not change it.
 
@@ -153,7 +153,7 @@ Set footer show or not and extra classnames.
 
 Show footer or not, it is controlled by `dispaly: none` so that it won't influence butons in footer even if footer is not show.
 
-- `footerClassName` **{ string }** _option_
+- `footerClassName` **{ string }** _optional_
 
 Extra classnames for footer, and if you have extra classname before and `footerClassName` is not truthy, we'll not change it.
 
@@ -165,7 +165,7 @@ Set inner content and click listener of ok button.
 
 Inner content of ok button, default is `ok`.
 
-- `onOK` **{ function }** _option_
+- `onOK` **{ function }** _optional_
 
 Callback when you click ok button, it will recive alert instance as first argument.
 
@@ -179,7 +179,7 @@ Set inner content and click listener of cancel button.
 
 Inner content of ok button, default is `cancel`.
 
-- `onCancel` **{ function }** _option_
+- `onCancel` **{ function }** _optional_
 
 Callback when you click cancel button, it will recive alert instance as first argument. And pay attention that `() => this.hide()` will be called before `onCancel()`.
 

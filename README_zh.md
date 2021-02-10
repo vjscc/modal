@@ -103,7 +103,7 @@ div[data-role='header']
 
 显然这样更符合语义化。
 
-- `header` 和 `body` 的参数类型被改为了 `string\|HTMLElement` 而不是单纯的 `string`。现在如果你传入一个字符串，我们回改变元素的 `innerHTML`，否则我们会调用 `append()` 方法将内容作为子节点插入。
+- `header` 和 `body` 的参数类型被改为了 `string|HTMLElement` 而不是单纯的 `string`。现在如果你传入一个字符串，我们回改变元素的 `innerHTML`，否则我们会调用 `append()` 方法将内容作为子节点插入。
 
 - `onOK` 和 `onCancel` 会接受弹出层实例本身作为第一个参数。
 
