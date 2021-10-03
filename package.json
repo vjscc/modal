@@ -1,6 +1,6 @@
 {
-  "name": "template",
-  "version": "0.1.0",
+  "name": "@vjscc/modal",
+  "version": "1.0.0",
   "license": "MIT",
   "files": [
     "package.json",
@@ -9,15 +9,15 @@
     "LICENSE",
     "dist"
   ],
-  "global": "YourLib",
-  "types": "dist/your-libs-name.d.ts",
-  "main": "dist/your-libs-name.js",
-  "browser": "dist/browser/your-libs-name.min.js",
-  "module": "dist/es/your-libs-name.js",
+  "global": "VjsccModal",
+  "types": "dist/modal.d.ts",
+  "main": "dist/modal.js",
+  "browser": "dist/browser/modal.min.js",
+  "module": "dist/es/modal.js",
   "scripts": {
     "start": "parcel ./src/test/index.html --cache-dir node_modules/.parcel --out-dir node_modules/.parcel",
     "build:js": "rollup -c && node scripts/removeRedundancyDeclarations.js",
-    "build:css": "parcel build ./src/index.less --out-dir dist --experimental-scope-hoisting --out-file your-libs-name.min.css --cache-dir node_modules/.parcel",
+    "build:css": "parcel build ./src/index.less --out-dir dist --experimental-scope-hoisting --out-file modal.min.css --cache-dir node_modules/.parcel",
     "build": "npm run build:js && npm run build:css",
     "pretest": "npm run build",
     "jest": "jest",
