@@ -24,6 +24,9 @@
     "test": "parcel ./test/index.html --cache-dir node_modules/.parcel --out-dir node_modules/.parcel",
     "lint": "eslint src"
   },
+  "dependencies": {
+    "@vjscc/utils": "^0.1.0"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
