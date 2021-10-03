@@ -1,124 +1,86 @@
+import { isString, isHTMLElement } from '@vjscc/utils'
+
+const step = 0.5
+
 /**
- * let dom element fade out
- * @param {HTMLElement} el dom element
+ * Let dom element fade out.
+ *
+ * @param el Dom element.
  */
-export function fadeOut(el) {
-  el.style.opacity = 1
+export function fadeOut(el: HTMLElement): void {
+  el.style.opacity = '1'
   ;(function fade() {
-    if ((el.style.opacity -= 0.05) < 0) {
+    const current = parseFloat(el.style.opacity)
+    if (current < step) {
       el.style.display = 'none'
     } else {
+      el.style.opacity = (current - step).toString()
       requestAnimationFrame(fade)
     }
   })()
 }
 
 /**
- * let dom element fade in
- * @param {HTMLElement} el dom element
- * @param {string} display dispaly after element in
+ * Let dom element fade in.
+ *
+ * @param el dom element.
+ * @param display dispaly after element in.
  */
-export function fadeIn(el, display = 'block') {
-  el.style.opacity = 0
+export function fadeIn(el: HTMLElement, display = 'block'): void {
+  el.style.opacity = '0'
   el.style.display = display
   ;(function fade() {
-    let val = parseFloat(el.style.opacity)
-    if (!((val += 0.05) > 1)) {
-      el.style.opacity = val
+    const current = parseFloat(el.style.opacity)
+    if (current + step <= 1) {
+      el.style.opacity = (current + step).toString()
       requestAnimationFrame(fade)
     }
   })()
 }
 
 /**
- * Gets the `toStringTag` of `value`.
+ * Change content of dom node.
  *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
+ * @param el Target node.
+ * @param content String or dom content.
  */
-function getTag(value) {
-  if (value === null) {
-    return value === undefined ? '[object Undefined]' : '[object Null]'
+export function changeNodeContent(el: HTMLElement, content: string | HTMLElement): void {
+  if (isString(content)) {
+    el.innerHTML = content as string
+  } else {
+    el.innerHTML = ''
+    el.append(content)
   }
-  return Object.prototype.toString.call(value)
 }
 
 /**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
+ * Check if value is a string or HTMLELement.
  *
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @param value Target value to check.
+ * @returns True if it is string or HTMLELement, false otherwise.
  */
-function isObjectLike(value) {
-  return typeof value === 'object' && value !== null
+export function isStringOrHTMLElement(value: unknown): boolean {
+  return isString(value) || isHTMLElement(value)
 }
 
+export type stringOrHTMLElement = string | HTMLElement
+
 /**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+ * Get element via string or HTMLElement.
+ *
+ * @param stringOrHTMLElement String or HTMLElement.
+ * @returns HTMLElement or null if not found or fail.
  */
-export function isPlainObject(value) {
-  if (!isObjectLike(value) || getTag(value) !== '[object Object]') {
-    return false
+export function getElementViaStringOrHTMLElement(
+  stringOrHTMLElement: stringOrHTMLElement
+): HTMLElement | null {
+  if (isHTMLElement(stringOrHTMLElement)) {
+    return stringOrHTMLElement as HTMLElement
   }
-  if (Object.getPrototypeOf(value) === null) {
-    return true
-  }
-  let proto = value
-  while (Object.getPrototypeOf(proto) !== null) {
-    proto = Object.getPrototypeOf(proto)
-  }
-  return Object.getPrototypeOf(value) === proto
-}
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- */
-export function isFunction(value) {
-  return typeof value === 'function'
-}
-
-/**
- * Checks if `value` is `undefined`.
- *
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
- */
-export function isUndefined(value) {
-  return typeof value === undefined
-}
-
-/**
- * Checks if `value` is `string`.
- *
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a `string`, else `false`.
- */
-function isString(value) {
-  return Object.prototype.toString.call(value) === '[object String]'
-}
-
-/**
- * Change content of a html node.
- *
- * @param {HTMLElement} el Html node.
- * @param {HTMLElement|string} content New content.
- */
-export function changeNodeContent(el, content) {
   try {
-    if (isString(content)) {
-      el.innerHTML = content
-    } else {
-      el.append(content)
-    }
+    return document.querySelector(stringOrHTMLElement as string)
   } catch (err) {
-    throw new Error(err)
+    console.error(err)
+    return null
   }
 }
