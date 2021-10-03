@@ -2,14 +2,24 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "commonjs": true
   },
-  "extends": ["eslint:recommended", "prettier", "plugin:prettier/recommended"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "warn"
-  }
+    "prettier/prettier": ["warn"]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "plugins": ["@typescript-eslint"]
+    }
+  ]
 }

@@ -1,5 +1,2 @@
-# dependencies 
-node_modules
-
-# build dir
 dist
+node_modules

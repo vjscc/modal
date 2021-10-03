@@ -47,9 +47,7 @@ const GmAlert = config => {
   let _show = isShow
 
   const [$mask, id] = createMask()
-  const instance = { $mask, id }
-  instance.__proto__ = GmAlert.prototype
-
+  const instance = { $mask, id, __proto__: GmAlert.prototype }
   maskClosAble && instance.$mask.addEventListener('click', () => instance.hide())
 
   instance.$modal = instance.$mask.querySelector('[data-role="modal"]')
