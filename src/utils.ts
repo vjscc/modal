@@ -39,21 +39,6 @@ export function fadeIn(el: HTMLElement, display = 'block'): void {
 }
 
 /**
- * Change content of dom node.
- *
- * @param el Target node.
- * @param content String or dom content.
- */
-export function changeNodeContent(el: HTMLElement, content: string | HTMLElement): void {
-  if (isString(content)) {
-    el.innerHTML = content as string
-  } else {
-    el.innerHTML = ''
-    el.append(content)
-  }
-}
-
-/**
  * Check if value is a string or HTMLELement.
  *
  * @param value Target value to check.

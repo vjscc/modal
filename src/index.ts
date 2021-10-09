@@ -2,7 +2,6 @@ import { isString } from '@vjscc/utils'
 import {
   fadeIn,
   fadeOut,
-  changeNodeContent,
   isStringOrHTMLElement,
   stringOrHTMLElement,
   getElementViaStringOrHTMLElement
