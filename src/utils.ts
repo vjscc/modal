@@ -1,6 +1,6 @@
 import { isString, isHTMLElement } from '@vjscc/utils'
 
-const step = 0.5
+const step = 0.025
 
 /**
  * Let dom element fade out.
@@ -69,16 +69,18 @@ export type stringOrHTMLElement = string | HTMLElement
  * Get element via string or HTMLElement.
  *
  * @param stringOrHTMLElement String or HTMLElement.
+ * @param container Where to find, default is `document`.
  * @returns HTMLElement or null if not found or fail.
  */
 export function getElementViaStringOrHTMLElement(
-  stringOrHTMLElement: stringOrHTMLElement
+  stringOrHTMLElement: stringOrHTMLElement,
+  container: HTMLElement | Document = document
 ): HTMLElement | null {
   if (isHTMLElement(stringOrHTMLElement)) {
     return stringOrHTMLElement as HTMLElement
   }
   try {
-    return document.querySelector(stringOrHTMLElement as string)
+    return container.querySelector(stringOrHTMLElement as string)
   } catch (err) {
     console.error(err)
     return null

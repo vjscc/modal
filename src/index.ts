@@ -13,21 +13,28 @@ const listenerMap = new Map()
 
 interface IVjsccModal {
   id: number
-  show: boolean
+  isShow: boolean
+  maskClose: boolean
   $mask: HTMLElement
+  $modal: HTMLElement
+  show: () => IVjsccModal
+  hide: () => IVjsccModal
 }
 
 interface IVjsccModalConstructorOptions {
   $mask: stringOrHTMLElement
-  show: boolean
+  isShow?: boolean
+  maskClose?: boolean
 }
 
 class VjsccModal implements IVjsccModal {
   id: number
-  show: boolean
+  isShow: boolean
+  maskClose: boolean
   $mask: HTMLElement
+  $modal: HTMLElement
   constructor(options: IVjsccModalConstructorOptions) {
-    const { $mask, show = false } = options
+    const { $mask, isShow = false, maskClose = true } = options
 
     if (!isStringOrHTMLElement($mask)) {
       throw new TypeError(
@@ -37,13 +44,40 @@ class VjsccModal implements IVjsccModal {
 
     const _$mask = getElementViaStringOrHTMLElement($mask)
     if (!_$mask) {
-      throw new Error(`Can not get correct elemt via 'options.$mask', please check out.`)
+      throw new Error(`Can not get correct element via 'options.$mask', please check out.`)
     }
 
     this.$mask = _$mask
 
+    const $modal = getElementViaStringOrHTMLElement('.vjscc-modal', this.$mask)
+    if (!$modal) {
+      throw new Error(`Can not get correct element '.vjsc-modal', please check out your HTML.`)
+    }
+
+    this.$modal = $modal
+
     this.id = i++
-    this.show = show
+    this.isShow = isShow
+    this.maskClose = maskClose
+
+    if (isShow) {
+      this.show()
+    }
+
+    if (maskClose) {
+      this.$mask.addEventListener('click', this.hide)
+      this.$modal.addEventListener('click', e => e.stopImmediatePropagation())
+    }
+  }
+  show = (): IVjsccModal => {
+    fadeIn(this.$mask, '')
+    this.isShow = true
+    return this
+  }
+  hide = (): IVjsccModal => {
+    fadeOut(this.$mask)
+    this.isShow = false
+    return this
   }
 }
 
