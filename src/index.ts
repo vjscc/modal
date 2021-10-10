@@ -10,7 +10,7 @@ let i = 0
 const listenerMap = new Map<string, eventHandler>()
 
 type eventHandler = (this: HTMLElement, ev: MouseEvent) => void
-type handler = (this: IVjsccModal, ev: MouseEvent) => void
+type handler = (this: VjsccModal, ev: MouseEvent) => void
 
 interface IVjsccModal {
   id: number
