@@ -23,10 +23,10 @@ interface IVjsccModal {
   $footer?: HTMLElement
   $ok?: HTMLElement
   $cancel?: HTMLElement
-  show: () => IVjsccModal
-  hide: () => IVjsccModal
-  setOnOK: (fn: handler) => IVjsccModal
-  setOnCancel: (fn: handler) => IVjsccModal
+  show: () => VjsccModal
+  hide: () => VjsccModal
+  setOnOK: (fn: handler) => VjsccModal
+  setOnCancel: (fn: handler) => VjsccModal
 }
 
 interface IVjsccModalConstructorOptions {
@@ -114,17 +114,17 @@ class VjsccModal implements IVjsccModal {
       this.setOnCancel(onCancel ?? this.hide)
     }
   }
-  show = (): IVjsccModal => {
+  show = (): VjsccModal => {
     fadeIn(this.$mask, '')
     this.isShow = true
     return this
   }
-  hide = (): IVjsccModal => {
+  hide = (): VjsccModal => {
     fadeOut(this.$mask)
     this.isShow = false
     return this
   }
-  setOnOK = (fn: handler): IVjsccModal => {
+  setOnOK = (fn: handler): VjsccModal => {
     if (!this.$ok) {
       console.warn(
         `Can not get correct '$ok' element when set 'onOK()', please checkout your HTML.`
@@ -144,7 +144,7 @@ class VjsccModal implements IVjsccModal {
 
     return this
   }
-  setOnCancel = (fn: handler): IVjsccModal => {
+  setOnCancel = (fn: handler): VjsccModal => {
     if (!this.$cancel) {
       console.warn(
         `Can not get correct '$cancel' element when set 'onCancel()', please checkout your HTML.`
