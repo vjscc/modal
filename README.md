@@ -93,6 +93,7 @@ options properties:
 | $mask     | `string \| HTMLElement`                      | ✔       |         | mask element or its CSS selector  |
 | isShow    | `boolean`                                    |         | false   | show directly after instantiation |
 | maskClose | `boolean`                                    |         | true    | close modal when click mask       |
+| maskColor | `string`                                     |         |         | color of mask, CSS format         |
 | onOK      | `(this: VjsccModal, ev: MouseEvent) => void` |         |         | handler when click ok button      |
 | onCancel  | `(this: VjsccModal, ev: MouseEvent) => void` |         |         | handler when click cancel button  |
 
@@ -110,13 +111,19 @@ Id of modal instance.
 
 type: `boolean`
 
-Whether modal is show or not.
+Whether modal is show or not. Can not change status of modal by changing this value, use `show()` and `hide()`.
 
 ### maskClose
 
 type: `boolean`
 
 Close modal when click mask.
+
+### maskColor
+
+type: `string`
+
+Color of mask, passed via constructor options.
 
 ### $mask
 

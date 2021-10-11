@@ -16,6 +16,7 @@ interface IVjsccModal {
   id: number
   isShow: boolean
   maskClose: boolean
+  maskColor?: string
   $mask: HTMLElement
   $modal: HTMLElement
   $header?: HTMLElement
@@ -33,6 +34,7 @@ interface IVjsccModalConstructorOptions {
   $mask: stringOrHTMLElement
   isShow?: boolean
   maskClose?: boolean
+  maskColor?: string
   onOK?: handler
   onCancel?: handler
 }
@@ -41,6 +43,7 @@ class VjsccModal implements IVjsccModal {
   id: number
   isShow: boolean
   maskClose: boolean
+  maskColor?: string
   $mask: HTMLElement
   $modal: HTMLElement
   $header?: HTMLElement
@@ -49,7 +52,7 @@ class VjsccModal implements IVjsccModal {
   $ok?: HTMLElement
   $cancel?: HTMLElement
   constructor(options: IVjsccModalConstructorOptions) {
-    const { $mask, isShow = false, maskClose = true, onOK, onCancel } = options
+    const { $mask, isShow = false, maskClose = true, maskColor, onOK, onCancel } = options
 
     if (!isStringOrHTMLElement($mask)) {
       throw new TypeError(
@@ -94,6 +97,11 @@ class VjsccModal implements IVjsccModal {
     this.id = i++
     this.isShow = isShow
     this.maskClose = maskClose
+
+    if (maskColor) {
+      this.maskColor = maskColor
+      this.$mask.style.backgroundColor = this.maskColor
+    }
 
     // If show dierectly.
     if (isShow) {
