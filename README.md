@@ -121,7 +121,7 @@ Close modal when click mask.
 
 ### maskColor
 
-type: `string`
+type: `string | undefined`
 
 Color of mask, passed via constructor options.
 
