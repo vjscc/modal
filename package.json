@@ -1,7 +1,19 @@
 {
   "name": "@vjscc/modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
+  "keywords": [
+    "vjscc",
+    "modal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vjscc/modal.git"
+  },
+  "homepage": "https://github.com/vjscc/modal#readme",
+  "bugs": {
+    "url": "https://github.com/vjscc/modal/issues"
+  },
   "files": [
     "package.json",
     "README.md",
