@@ -15,7 +15,7 @@ If you want use with bundler like `webpack`, and import library with `commonjs` 
 Use npm:
 
 ```bash
-npm install @vjscc/modal
+npm install @vjscc/modal -S
 ```
 
 Or use yarn:
@@ -24,11 +24,12 @@ Or use yarn:
 yarn add @vjscc/modal
 ```
 
-Then just import libarary:
+Then import libarary and style:
 
 ```javascript
 // Use commonjs
 const VjsccModal = require('@vjscc/modal')
+require('@vjscc/modal/dist/modal.min.css')
 
 // Use ESM
 import VjsccModal from '@vjscc/modal'
@@ -37,9 +38,9 @@ import '@vjscc/modal/dist/modal.min.css'
 
 > We provide 3 versions for different ways to import: `UMD`, `ESM` and `browser`, see [package.json](./package.json) to get the dist path.
 
-If you want import with `<link>` and `<script>` tag, you could download source or use CDN like [jsdelivr](https://www.jsdelivr.com/).
+If you want import with `<link>` and `<script>` tag, you could download source on [Release Page](https://github.com/vjscc/modal/releases) or use CDN like [jsdelivr](https://www.jsdelivr.com/).
 
-> `UMD` version is not minified, `browser` is minified, we recommend use `browser` version in usual. And `CSS` just have minified version.
+> `UMD` version is not minified, `browser` is minified, we recommend use `browser` version in usual. `ESM` version is mostly close to source code and for those use bundler support ESM. And `CSS` just have minified version.
 
 # Get Start
 
@@ -123,7 +124,7 @@ Close modal when click mask.
 
 type: `string | undefined`
 
-Color of mask, passed via constructor options.
+Color of mask, passed via constructor options, if you didn't pass its value would be `undefined`.
 
 ### $mask
 
@@ -185,7 +186,7 @@ Hide modal.
 
 type: `(fn: handler) => VjsccModal`
 
-Interface of `handler`:
+Type definition of `handler` in TypeScript:
 
 ```typescript
 type handler = (this: VjsccModal, ev: MouseEvent) => void

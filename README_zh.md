@@ -15,7 +15,7 @@
 使用 npm:
 
 ```bash
-npm install @vjscc/modal
+npm install @vjscc/modal -S
 ```
 
 或者使用 yarn:
@@ -24,11 +24,12 @@ npm install @vjscc/modal
 yarn add @vjscc/modal
 ```
 
-接下来引入库:
+接下来引入库和样式:
 
 ```javascript
 // 使用 commonjs。
 const VjsccModal = require('@vjscc/modal')
+require('@vjscc/modal/dist/modal.min.css')
 
 // 使用 ESM。
 import VjsccModal from '@vjscc/modal'
@@ -39,7 +40,7 @@ import '@vjscc/modal/dist/modal.min.css'
 
 如果你想使用 `<link>` 和 `<script>` 标签来引入，你可以从 [Github Release 页面](https://github.com/vjscc/modal/release) 下载代码或者使用像 [jsdelivr](https://www.jsdelivr.com/) 这样的 CDN。
 
-> `UMD` 版本是未压缩的，`browser` 版本则是压缩过的，通常，我们建议使用 `browser` 版本。`CSS` 只提供压缩版本。
+> `UMD` 版本是未压缩的，`browser` 版本则是压缩过的，通常，我们建议使用 `browser` 版本。`ESM` 版本是非常接近源码，它是给那些支持 ESM 引入的打包工具用的。 `CSS` 只提供压缩版本。
 
 # 起步
 
