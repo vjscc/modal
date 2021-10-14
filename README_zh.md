@@ -2,9 +2,11 @@
 
 原生 JavaScript 弹出层组件。
 
-![npm](https://img.shields.io/npm/v/@vjscc/modal?style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?style=flat-square)
-![GitHub](https://img.shields.io/github/license/vjscc/modal?style=flat-square)
+![npm](https://img.shields.io/npm/v/@vjscc/modal?logo=npm&style=flat-square)
+![npm type definitions](https://img.shields.io/npm/types/@vjscc/modal?logo=typescript&style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?logo=npm&style=flat-square)
+![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square)
+![GitHub](https://img.shields.io/github/license/vjscc/modal?logo=github&style=flat-square)
 
 **简体中文** | [English](./README.md)
 
