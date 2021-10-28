@@ -2,9 +2,10 @@ import {
   fadeIn,
   fadeOut,
   isStringOrHTMLElement,
-  stringOrHTMLElement,
   getElementViaStringOrHTMLElement
-} from './utils'
+} from '@vjscc/utils'
+
+type stringOrHTMLElement = string | HTMLElement
 
 let i = 0
 const listenerMap = new Map<string, eventHandler>()
@@ -123,12 +124,12 @@ class VjsccModal implements IVjsccModal {
     }
   }
   show = (): VjsccModal => {
-    fadeIn(this.$mask, '')
+    fadeIn(this.$mask, { startDisplay: '', timingFunctionName: 'easeInOutCubic' })
     this.isShow = true
     return this
   }
   hide = (): VjsccModal => {
-    fadeOut(this.$mask)
+    fadeOut(this.$mask, { timingFunctionName: 'easeInOutCubic' })
     this.isShow = false
     return this
   }
