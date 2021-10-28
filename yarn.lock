@@ -1477,10 +1477,10 @@
     "@typescript-eslint/types" "4.32.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vjscc/utils@^0.1.0":
-  version "0.1.0"
-  resolved "https://r.cnpmjs.org/@vjscc/utils/download/@vjscc/utils-0.1.0.tgz#7853034bbeefa77e55bc87028833a4372cf9d8ec"
-  integrity sha1-eFMDS77vp35VvIcCiDOkNyz52Ow=
+"@vjscc/utils@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@vjscc/utils/-/utils-0.2.0.tgz#26ffbf0badcda49b6098c9edc50b0e8335887cdd"
+  integrity sha512-GC9vxf7TKxt4EpY9j5vl5WWYbjv9AyxiuR40lnd9hMW4gcdvlUtA7usadwdmU8qqzKFf4ZMAYS0+swvgnl56bw==
 
 "@wessberg/stringutil@^1.0.19":
   version "1.0.19"
