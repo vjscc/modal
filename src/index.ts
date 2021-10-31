@@ -40,6 +40,23 @@ interface IVjsccModalConstructorOptions {
   onCancel?: handler
 }
 
+interface IDefaultConfig {
+  isShow: boolean
+  maskClose: boolean
+  maskColor?: string
+}
+
+interface IConfigArgument {
+  isShow?: boolean
+  maskClose?: boolean
+  maskColor?: string
+}
+
+let defaultConfig: IDefaultConfig = {
+  isShow: false,
+  maskClose: true
+}
+
 class VjsccModal implements IVjsccModal {
   id: number
   isShow: boolean
@@ -53,7 +70,8 @@ class VjsccModal implements IVjsccModal {
   $ok?: HTMLElement
   $cancel?: HTMLElement
   constructor(options: IVjsccModalConstructorOptions) {
-    const { $mask, isShow = false, maskClose = true, maskColor, onOK, onCancel } = options
+    const config = { ...defaultConfig, ...options }
+    const { $mask, isShow, maskClose, maskColor, onOK, onCancel } = config
 
     if (!isStringOrHTMLElement($mask)) {
       throw new TypeError(
@@ -122,6 +140,9 @@ class VjsccModal implements IVjsccModal {
     if (this.$cancel) {
       this.setOnCancel(onCancel ?? this.hide)
     }
+  }
+  static config(config: IConfigArgument): void {
+    defaultConfig = { ...defaultConfig, ...config }
   }
   show = (): VjsccModal => {
     fadeIn(this.$mask, { startDisplay: '', timingFunctionName: 'easeInOutCubic' })
