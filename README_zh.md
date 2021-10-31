@@ -5,7 +5,9 @@
 ![npm](https://img.shields.io/npm/v/@vjscc/modal?logo=npm&style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/@vjscc/modal?logo=typescript&style=flat-square)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?logo=npm&style=flat-square)
-![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square)
+
+<!-- ![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square) -->
+
 ![GitHub](https://img.shields.io/github/license/vjscc/modal?logo=github&style=flat-square)
 
 **简体中文** | [English](./README.md)
@@ -201,6 +203,24 @@ type handler = (this: VjsccModal, ev: MouseEvent) => void
 类型：`(fn: handler) => VjsccModal`
 
 设置取消按钮的回调函数。
+
+## 静态方法
+
+### VjsccModal.config(config)
+
+`config` 参数的接口:
+
+```typescript
+interface IConfigArgument {
+  isShow?: boolean
+  maskClose?: boolean
+  maskColor?: string
+}
+```
+
+类型：`(config: IConfigArgument) => void`
+
+设置默认配置。参考上面的文档可知这些字段的作用。
 
 # 许可证
 

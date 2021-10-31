@@ -5,7 +5,9 @@ Vanilla JavaScript modal component.
 ![npm](https://img.shields.io/npm/v/@vjscc/modal?logo=npm&style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/@vjscc/modal?logo=typescript&style=flat-square)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?logo=npm&style=flat-square)
-![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square)
+
+<!-- ![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square) -->
+
 ![GitHub](https://img.shields.io/github/license/vjscc/modal?logo=github&style=flat-square)
 
 [简体中文](./README_zh.md) | **English**
@@ -184,7 +186,7 @@ type: `() => VjsccModal`
 
 Hide modal.
 
-### setOnOK()
+### setOnOK(fn)
 
 type: `(fn: handler) => VjsccModal`
 
@@ -196,11 +198,29 @@ type handler = (this: VjsccModal, ev: MouseEvent) => void
 
 Set handler of ok button click event.
 
-### setOnCancel()
+### setOnCancel(fn)
 
 type: `(fn: handler) => VjsccModal`
 
 Set handler of cancel button click event.
+
+## Static function
+
+### VjsccModal.config(config)
+
+Interface of argument `config`:
+
+```typescript
+interface IConfigArgument {
+  isShow?: boolean
+  maskClose?: boolean
+  maskColor?: string
+}
+```
+
+type: `(config: IConfigArgument) => void`
+
+Set default config. See about you will know what they are for.
 
 # License
 
