@@ -4,10 +4,7 @@
 
 ![npm](https://img.shields.io/npm/v/@vjscc/modal?logo=npm&style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/@vjscc/modal?logo=typescript&style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?logo=npm&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/vjscc/modal?logo=github&style=flat-square)
-
-<!-- ![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square) -->
 
 **简体中文** | [English](./README.md)
 
@@ -32,18 +29,40 @@ yarn add @vjscc/modal
 ```javascript
 // 使用 commonjs。
 const VjsccModal = require('@vjscc/modal')
-require('@vjscc/modal/dist/modal.min.css')
+require('@vjscc/modal/dist/index.css')
 
 // 使用 ESM。
 import VjsccModal from '@vjscc/modal'
-import '@vjscc/modal/dist/modal.min.css'
+import '@vjscc/modal/dist/index.css'
 ```
 
-> 我们为不同的引入方式提供 3 个版本：`UMD`，`ESM` 和 `browser`，阅读 [package.json](./package.json) 来获取打包后的路径。
+或者使用 `link` 和 `script` 标签：
 
-如果你想使用 `<link>` 和 `<script>` 标签来引入，你可以从 [Github Release 页面](https://github.com/vjscc/modal/release) 下载代码或者使用像 [jsdelivr](https://www.jsdelivr.com/) 这样的 CDN。
+```html
+<link rel="stylesheet" href="path/to/vjscc-modal.min.css" />
 
-> `UMD` 版本是未压缩的，`browser` 版本则是压缩过的，通常，我们建议使用 `browser` 版本。`ESM` 版本是非常接近源码，它是给那些支持 ESM 引入的打包工具用的。 `CSS` 只提供压缩版本。
+<!-- Unbundled UMD -->
+<script src="path/to/vjscc-utils.min.js"></script>
+<script src="path/to/vjscc-modal.min.js"></script>
+
+<!-- Bundled UMD -->
+<script src="path/to/vjscc-modal.bundle.min.js"></script>
+```
+
+如果你想用 `<link>` 和 `<script>` 标签，你可以从 [发布页](https://github.com/vjscc/modal/releases) 或者用像 [jsdelivr](https://www.jsdelivr.com/) 这样的 CDN。
+
+## 版本细节
+
+| 版本          | 路径                                   | cjs | esm | amd | iife | 是否压缩 | 包含 `@vjscc/utils` |
+| ------------- | -------------------------------------- | --- | --- | --- | ---- | -------- | ------------------- |
+| UMD           | dist/index.js                          | ✔   |     | ✔   | ✔    |          |                     |
+| ESM           | dist/es/index.js                       |     | ✔   |     |      |          |                     |
+| Unbundled UMD | dist/browser/vjscc-modal.min.js        | ✔   |     | ✔   | ✔    | ✔        |                     |
+| Bundled UMD   | dist/browser/vjscc-modal.bundle.min.js | ✔   |     | ✔   | ✔    | ✔        | ✔                   |
+
+> 请注意我们的库依赖于 `@vjscc/utils`，因此如果你已经在使用 `script` 标签去加载 `@vjscc/utils` 或者其他来自 `vjscc` 的组件库，那么我们建议你使用 `Unbundled UMD` 版本. 否则，用其他的版本可能会更好。
+
+查看 [package.json](./package.json) 和 [rollup.config.js](./rollup.config.js) 了解更多。
 
 # 起步
 
@@ -92,14 +111,16 @@ modal.show()
 
 配置的属性：
 
-| 名称      | 类型                                         | 是否必须 | 默认值  | 描述                                |
-| --------- | -------------------------------------------- | -------- | ------- | ----------------------------------- |
-| $mask     | `string \| HTMLElement`                      | ✔        |         | 遮罩层元素或其 CSS 选择器           |
-| isShow    | `boolean`                                    |          | `false` | 是否在实例化后显示弹出层            |
-| maskClose | `boolean`                                    |          | `true`  | 点击遮罩时关闭弹出层                |
-| maskColor | `string`                                     |          |         | 遮罩层的颜色，使用 CSS 中的颜色格式 |
-| onOK      | `(this: VjsccModal, ev: MouseEvent) => void` |          |         | 点击确定按钮的回调函数              |
-| onCancel  | `(this: VjsccModal, ev: MouseEvent) => void` |          |         | 点击取消按钮的回调函数              |
+| 名称           | 类型                                         | 是否必须 | 默认值              | 描述                                |
+| -------------- | -------------------------------------------- | -------- | ------------------- | ----------------------------------- |
+| $mask          | `string \| HTMLElement`                      | ✔        |                     | 遮罩层元素或其 CSS 选择器           |
+| isShow         | `boolean`                                    |          | `false`             | 是否在实例化后显示弹出层            |
+| maskClose      | `boolean`                                    |          | `true`              | 点击遮罩时关闭弹出层                |
+| maskColor      | `string`                                     |          |                     | 遮罩层的颜色，使用 CSS 中的颜色格式 |
+| onOK           | `(this: VjsccModal, ev: MouseEvent) => void` |          |                     | 点击确定按钮的回调函数              |
+| onCancel       | `(this: VjsccModal, ev: MouseEvent) => void` |          |                     | 点击取消按钮的回调函数              |
+| duration       | `number`                                     |          | `0.25 * 1000`       | 渐入（出）动画时长                  |
+| timingFunction | `(x: number) => number`                      |          | `VjsccUtils.linear` | 动画时间函数                        |
 
 > **注意**: 如果你传入 `onOK` 或 `onCancel` 但是你的 HTML 中没有确定按钮或取消按钮元素，那么除了警告之外什么都不会发生。当然，如果有取消按钮但是没有传 `onCancel`，取消按钮会以 `hide()` 方法作为点击事件的回调。
 
@@ -116,6 +137,18 @@ modal.show()
 类型：`boolean`
 
 弹出层是否显示。改变这个值并不能改变弹出层的状态，请使用 `show()` 和 `hide()` 方法。
+
+### duration
+
+type: `(x: number) => number`
+
+渐入（出）动画时长。
+
+### timingFunction
+
+type: `boolean`
+
+动画时间函数。
 
 ### maskClose
 
@@ -210,11 +243,15 @@ type handler = (this: VjsccModal, ev: MouseEvent) => void
 `config` 参数的接口:
 
 ```typescript
-interface IConfigArgument {
-  isShow?: boolean
-  maskClose?: boolean
+interface IDefaultConfig {
+  isShow: boolean
+  maskClose: boolean
   maskColor?: string
+  duration: number
+  timingFunction: (x: number) => number
 }
+
+type IConfigArgument = Partial<IDefaultConfig>
 ```
 
 类型：`(config: IConfigArgument) => void`

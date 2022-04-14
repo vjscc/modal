@@ -4,10 +4,7 @@ Vanilla JavaScript modal component.
 
 ![npm](https://img.shields.io/npm/v/@vjscc/modal?logo=npm&style=flat-square)
 ![npm type definitions](https://img.shields.io/npm/types/@vjscc/modal?logo=typescript&style=flat-square)
-![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/modal?logo=npm&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/vjscc/modal?logo=github&style=flat-square)
-
-<!-- ![Codecov](https://img.shields.io/codecov/c/github/vjscc/modal?logo=codecov&style=flat-square) -->
 
 [简体中文](./README_zh.md) | **English**
 
@@ -31,19 +28,42 @@ Then import libarary and style:
 
 ```javascript
 // Use commonjs
-const VjsccModal = require('@vjscc/modal')
-require('@vjscc/modal/dist/modal.min.css')
+const VjsccModal = require('@vjscc/modal') // UMD
+require('@vjscc/modal/dist/index.css')
 
 // Use ESM
-import VjsccModal from '@vjscc/modal'
-import '@vjscc/modal/dist/modal.min.css'
+import VjsccModal from '@vjscc/modal' // ESM
+import '@vjscc/modal/dist/index.css'
 ```
 
-> We provide 3 versions for different ways to import: `UMD`, `ESM` and `browser`, see [package.json](./package.json) to get the dist path.
+Or use `link` and `script` tag:
+
+```html
+<link rel="stylesheet" href="path/to/vjscc-modal.min.css" />
+
+<!-- Unbundled UMD -->
+<script src="path/to/vjscc-utils.min.js"></script>
+<script src="path/to/vjscc-modal.min.js"></script>
+
+<!-- Bundled UMD -->
+<script src="path/to/vjscc-modal.bundle.min.js"></script>
+```
 
 If you want import with `<link>` and `<script>` tag, you could download source on [Release Page](https://github.com/vjscc/modal/releases) or use CDN like [jsdelivr](https://www.jsdelivr.com/).
 
-> `UMD` version is not minified, `browser` is minified, we recommend use `browser` version in usual. `ESM` version is mostly close to source code and for those use bundler support ESM. And `CSS` just have minified version.
+## Version Details
+
+| version       | path                                   | cjs | esm | amd | iife | minified | include `@vjscc/utils` |
+| ------------- | -------------------------------------- | --- | --- | --- | ---- | -------- | ---------------------- |
+| UMD           | dist/index.js                          | ✔   |     | ✔   | ✔    |          |                        |
+| ESM           | dist/es/index.js                       |     | ✔   |     |      |          |                        |
+| Unbundled UMD | dist/browser/vjscc-modal.min.js        | ✔   |     | ✔   | ✔    | ✔        |                        |
+| Bundled UMD   | dist/browser/vjscc-modal.bundle.min.js | ✔   |     | ✔   | ✔    | ✔        | ✔                      |
+
+> Please notice that we use `@vjscc/utils` as dependency, so if you've already used `@vjscc/utils`
+> or other component libraries from `vjscc` through `script` tags, we suggest that you could use `Unbundled UMD` version. Otherwise, use other versions maybe better.
+
+See [package.json](./package.json) and [rollup.config.js](./rollup.config.js) to get further.
 
 # Get Start
 
@@ -92,14 +112,16 @@ Then you will see the modal show in your browser.
 
 options properties:
 
-| name      | type                                         | require | default | description                       |
-| --------- | -------------------------------------------- | ------- | ------- | --------------------------------- |
-| $mask     | `string \| HTMLElement`                      | ✔       |         | mask element or its CSS selector  |
-| isShow    | `boolean`                                    |         | false   | show directly after instantiation |
-| maskClose | `boolean`                                    |         | true    | close modal when click mask       |
-| maskColor | `string`                                     |         |         | color of mask, CSS format         |
-| onOK      | `(this: VjsccModal, ev: MouseEvent) => void` |         |         | handler when click ok button      |
-| onCancel  | `(this: VjsccModal, ev: MouseEvent) => void` |         |         | handler when click cancel button  |
+| name           | type                                         | require | default             | description                       |
+| -------------- | -------------------------------------------- | ------- | ------------------- | --------------------------------- |
+| $mask          | `string \| HTMLElement`                      | ✔       |                     | mask element or its CSS selector  |
+| isShow         | `boolean`                                    |         | `false`             | show directly after instantiation |
+| maskClose      | `boolean`                                    |         | `true`              | close modal when click mask       |
+| maskColor      | `string`                                     |         |                     | color of mask, CSS format         |
+| onOK           | `(this: VjsccModal, ev: MouseEvent) => void` |         |                     | handler when click ok button      |
+| onCancel       | `(this: VjsccModal, ev: MouseEvent) => void` |         |                     | handler when click cancel button  |
+| duration       | `number`                                     |         | `0.25 * 1000`       | fade in/out animation duration    |
+| timingFunction | `(x: number) => number`                      |         | `VjsccUtils.linear` | animation timing function         |
 
 > **Notice**: If you pass `onOK` or `onCancel` but there's no ok or cancel button element in your HTML, nothing will happen but a warning. Also, if you have cancel button element in your HTML and didn't pass `onCancel`, cancel button will have `hide()` as click event handler.
 
@@ -116,6 +138,18 @@ Id of modal instance.
 type: `boolean`
 
 Whether modal is show or not. Can not change status of modal by changing this value, use `show()` and `hide()`.
+
+### duration
+
+type: `(x: number) => number`
+
+Fade in/out animation duration.
+
+### timingFunction
+
+type: `boolean`
+
+Animation timing function.
 
 ### maskClose
 
@@ -210,11 +244,15 @@ Set handler of cancel button click event.
 Interface of argument `config`:
 
 ```typescript
-interface IConfigArgument {
-  isShow?: boolean
-  maskClose?: boolean
+interface IDefaultConfig {
+  isShow: boolean
+  maskClose: boolean
   maskColor?: string
+  duration: number
+  timingFunction: (x: number) => number
 }
+
+type IConfigArgument = Partial<IDefaultConfig>
 ```
 
 type: `(config: IConfigArgument) => void`
