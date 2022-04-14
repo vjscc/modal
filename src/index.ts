@@ -2,8 +2,11 @@ import {
   fadeIn,
   fadeOut,
   isStringOrHTMLElement,
-  getElementViaStringOrHTMLElement
+  getElementViaStringOrHTMLElement,
+  linear
 } from '@vjscc/utils'
+
+import './index.less'
 
 type stringOrHTMLElement = string | HTMLElement
 
@@ -16,6 +19,8 @@ type handler = (this: VjsccModal, ev: MouseEvent) => void
 interface IVjsccModal {
   id: number
   isShow: boolean
+  duration: number
+  timingFunction: (x: number) => number
   maskClose: boolean
   maskColor?: string
   $mask: HTMLElement
@@ -38,28 +43,32 @@ interface IVjsccModalConstructorOptions {
   maskColor?: string
   onOK?: handler
   onCancel?: handler
+  duration?: number
+  timingFunction?: (x: number) => number
 }
 
 interface IDefaultConfig {
   isShow: boolean
   maskClose: boolean
   maskColor?: string
+  duration: number
+  timingFunction: (x: number) => number
 }
 
-interface IConfigArgument {
-  isShow?: boolean
-  maskClose?: boolean
-  maskColor?: string
-}
+type IConfigArgument = Partial<IDefaultConfig>
 
 let defaultConfig: IDefaultConfig = {
   isShow: false,
-  maskClose: true
+  maskClose: true,
+  duration: 0.25 * 1000,
+  timingFunction: linear
 }
 
 class VjsccModal implements IVjsccModal {
   id: number
   isShow: boolean
+  duration: number
+  timingFunction: (x: number) => number
   maskClose: boolean
   maskColor?: string
   $mask: HTMLElement
@@ -71,7 +80,7 @@ class VjsccModal implements IVjsccModal {
   $cancel?: HTMLElement
   constructor(options: IVjsccModalConstructorOptions) {
     const config = { ...defaultConfig, ...options }
-    const { $mask, isShow, maskClose, maskColor, onOK, onCancel } = config
+    const { $mask, isShow, maskClose, maskColor, onOK, onCancel, duration, timingFunction } = config
 
     if (!isStringOrHTMLElement($mask)) {
       throw new TypeError(
@@ -140,17 +149,24 @@ class VjsccModal implements IVjsccModal {
     if (this.$cancel) {
       this.setOnCancel(onCancel ?? this.hide)
     }
+
+    this.duration = duration
+    this.timingFunction = timingFunction
   }
   static config(config: IConfigArgument): void {
     defaultConfig = { ...defaultConfig, ...config }
   }
   show = (): VjsccModal => {
-    fadeIn(this.$mask, { startDisplay: '', timingFunctionName: 'easeInOutCubic' })
+    fadeIn(this.$mask, {
+      startDisplay: '',
+      timingFunction: this.timingFunction,
+      duration: this.duration
+    })
     this.isShow = true
     return this
   }
   hide = (): VjsccModal => {
-    fadeOut(this.$mask, { timingFunctionName: 'easeInOutCubic' })
+    fadeOut(this.$mask, { timingFunction: this.timingFunction, duration: this.duration })
     this.isShow = false
     return this
   }
